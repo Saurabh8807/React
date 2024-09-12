@@ -1,31 +1,22 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestraunt] = useState([]);
-  const [serachText, setSearchText] = useState("");
-  const [filteredResto, setfilteredResto] = useState([]);
-  console.log("top of component", listOfRestaurants);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredResto, setFilteredResto] = useState([]);
 
   const fetchData = async () => {
-    console.log("i am in fetchData function first ");
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING#"
-    );
-    console.log("i am in fetchData function second");
+    const data = await fetch("http://localhost:3000/api");
     const json = await data.json();
-    setListOfRestraunt(json.data.cards[0].card.card.imageGridCards.info);
-    setfilteredResto(json.data.cards[0].card.card.imageGridCards.info);
+    setListOfRestaurants(json);
+    setFilteredResto(json);
   };
 
   useEffect(() => {
-       fetchData();
-    console.log("inside useeffect");
-  },[]);
-
-  console.log("outside useffect");
+    fetchData();
+  }, []);
 
   return (
     <div className="body">
@@ -34,33 +25,35 @@ const Body = () => {
       ) : (
         <>
           <div className="filter">
-            <button className="filter-btn">Top Rated Restaurants</button>
+            <button
+              className="filter-btn"
+              onClick={() => {
+                const filtered = listOfRestaurants.filter(
+                  (resto) => resto.rating >= 4.5
+                );
+                setFilteredResto(filtered);
+              }}
+            >
+              Top Rated Restaurants
+            </button>
           </div>
           <div>
             <input
               type="text"
-              value={serachText}
+              value={searchText}
               onChange={(e) => {
                 setSearchText(e.target.value);
-                console.log(e.target.value);
               }}
             />
             <button
               onClick={() => {
-                const filtered = listOfRestaurants.filter((resto) => {
-                  console.log(
-                    resto.description.toLowerCase().includes(serachText)
-                  );
-                  return resto.description
-                    .toLowerCase()
-                    .includes(serachText.toLowerCase());
-                });
-                console.log(filtered);
-                // setListOfRestraunt(filtered)
-                setfilteredResto(filtered);
+                const filtered = listOfRestaurants.filter((resto) =>
+                  resto.name.toLowerCase().includes(searchText.toLowerCase())
+                );
+                setFilteredResto(filtered);
               }}
             >
-              search
+              Search
             </button>
           </div>
           <div className="res-container">
