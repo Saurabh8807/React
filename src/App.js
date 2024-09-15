@@ -6,11 +6,12 @@ import Body from "./components/Body";
 import { createBrowserRouter,Outlet,RouterProvider } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Resto from "./components/Resto";
 
 const AppLayout = () => {
   return (
     <div className="app">
-      <Header />
+      {Header()}
       <Outlet />
     </div>
   );
@@ -32,6 +33,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/:id",
+        element: <Resto />,
       },
     ],
     errorElement: <Error />,

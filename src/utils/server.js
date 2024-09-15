@@ -51,6 +51,21 @@ app.get("/api", (req, res) => {
   res.json(restaurants);
 });
 
+// Create GET API to return a restaurant by ID
+app.get("/api/:id", (req, res) => {
+  const id = req.params.id; // Convert req.params.id to a number
+  console.log(id)
+  console.log(id);
+  const resto = restaurants.find((obj) => obj.id == id); // Compare numbers using ===
+  console.log(resto);
+
+  if (resto) {
+    res.json(resto);
+  } else {
+    res.status(404).json({ message: "Restaurant not found" });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
