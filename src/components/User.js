@@ -7,7 +7,7 @@ const User =(info)=>{
 
     useEffect(()=>{
         console.log("hello i am useEffect User")
-    })
+    },[])
     console.log("i am user");
 
     return (

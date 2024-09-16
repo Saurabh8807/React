@@ -7,6 +7,10 @@ const About = ()=>{
     const [count, setCount] = useState(0);
     useEffect(() => {
       console.log("hello i am useEffect About");
+
+      return()=>{
+        console.log("i am in return useeffect ")
+      }
     });
     console.log("i am about");
 
@@ -25,10 +29,10 @@ const About = ()=>{
     return (
       <>
         {count}
-        {/* <User info={self} name="ooooooo" /> */}
+        <User info={self} name="ooooooo" />
         <button onClick={() => setCount(count + 1)}>c</button>
-        <UserClass info={self} name="ooooooo" />
-        <UserClass2 info={self} name="ooooooo" />
+        {/* {/* <UserClass info={self} name="ooooooo" /> */}
+        {/* <UserClass2 info={self} name="ooooooo" />  */}
       </>
     );
 }
