@@ -46,18 +46,14 @@ const restaurants = [
   },
 ];
 
-// Create GET API to return the restaurant data
 app.get("/api", (req, res) => {
   res.json(restaurants);
 });
 
-// Create GET API to return a restaurant by ID
 app.get("/api/:id", (req, res) => {
-  const id = req.params.id; // Convert req.params.id to a number
-  console.log(id)
-  console.log(id);
-  const resto = restaurants.find((obj) => obj.id == id); // Compare numbers using ===
-  console.log(resto);
+  const id = req.params.id;
+
+  const resto = restaurants.find((obj) => obj.id == id); 
 
   if (resto) {
     res.json(resto);

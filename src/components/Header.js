@@ -1,9 +1,21 @@
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
+  console.log("header");
+  const isOnline = useOnlineStatus();
+  console.log("isOnline", isOnline);
   return (
     <div className="header">
+      <div
+        style={{
+          backgroundColor: `${isOnline ? "green" : "red"}`,
+          height: "10px",
+          width: "10px",
+        }}
+      ></div>
+
       <div className="logo-container">
         <img className="logo" src={LOGO_URL} />
       </div>

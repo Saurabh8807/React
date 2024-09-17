@@ -2,22 +2,34 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const isOnline = useOnlineStatus();
   const [filteredResto, setFilteredResto] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch("http://localhost:3000/api");
-    const json = await data.json();
-    setListOfRestaurants(json);
-    setFilteredResto(json);
+    try {
+      const data = await fetch("http://localhost:3000/api");
+      const json = await data.json();
+      setListOfRestaurants(json);
+      setFilteredResto(json);
+    } catch (error) {
+      return <Shimmer/>
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log(isOnline)
+  if(!isOnline){
+    return <h1>Please check your internet connection</h1>
+  }
 
   return (
     <div className="body">
