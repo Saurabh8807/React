@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{RestaurantCardPromo} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -31,15 +31,18 @@ const Body = () => {
     return <h1>Please check your internet connection</h1>
   }
 
+  const PromotedResto=RestaurantCardPromo(RestaurantCard)
+
   return (
-    <div className="body">
+    <div className="">
       {listOfRestaurants.length === 0 ? (
         <Shimmer />
       ) : (
         <>
-          <div className="filter">
+        <div className="flex">
+          <div className="">
             <button
-              className="filter-btn"
+              className=" bg-blue-500 hover:bg-blue-700 p-2 text-white m-2"
               onClick={() => {
                 const filtered = listOfRestaurants.filter(
                   (resto) => resto.rating >= 4.5
@@ -52,6 +55,7 @@ const Body = () => {
           </div>
           <div>
             <input
+            className="border border-black my-3"
               type="text"
               value={searchText}
               onChange={(e) => {
@@ -59,6 +63,7 @@ const Body = () => {
               }}
             />
             <button
+            className=" bg-blue-500 hover:bg-blue-700 p-2 text-white m-2"
               onClick={() => {
                 const filtered = listOfRestaurants.filter((resto) =>
                   resto.name.toLowerCase().includes(searchText.toLowerCase())
@@ -69,11 +74,15 @@ const Body = () => {
               Search
             </button>
           </div>
-          <div className="res-container">
+          </div>
+          <div className="flex flex-wrap">
             {filteredResto.map((restaurant) => (
               <Link to={"/"+restaurant.id} key={restaurant.id}>
+                <div className="mx-3 my-3 border border-black">
+                  {/* {restaurant.promoted ? <PromotedResto resData={restaurant}/>:<RestaurantCard resData={restaurant} />} */}
+                  {restaurant.promoted ? <PromotedResto resData={restaurant}/>:<RestaurantCard resData={restaurant} />}
                 
-                <RestaurantCard key={restaurant.id} resData={restaurant} />
+                </div>
               </Link>
             ))}
           </div>

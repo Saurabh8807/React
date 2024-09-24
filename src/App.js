@@ -12,9 +12,14 @@ const Body = lazy(() => import("./components/Body"));
 
 
 const AppLayout = () => {
+  const obj = {
+    name:"w",
+    age:2
+  }
   return (
     <div className="app">
-      {Header()}
+      {Header(obj)}
+      {/* <Header obj={obj}/> */}
       <Outlet />
     </div>
   );

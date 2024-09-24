@@ -2,6 +2,8 @@ import React, { useEffect,useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useRestoData from '../utils/useRestoData'
 import Shimmer from './Shimmer'
+import useDetailData from '../utils/useDetailData'
+import  MoreRestoData  from './MoreRestoData'
 
 const Resto = () => {
     const {id} = useParams()
@@ -13,20 +15,39 @@ const Resto = () => {
     //     setRestaurant(json)
     // },[])
 
-    const resto = useRestoData(id)
-    console.log("resto",resto)
-
     //  if (!resto) {
     //    return <Shimmer/> // Render loading state while data is being fetched
     //  }
+    // console.log("hello i am in resto 1")
+    const resto = useRestoData(id)
+    // console.log("res",resto)
+    const detailData =  useDetailData();
+    console.log(detailData);
+    
+    // console.log("hello i am in resto 2")
+
+
+    console.log("detail",detailData)
 
   return (
-    <div>
-      <h1>{resto.name}</h1>
-      <p>{resto.address}</p>
-      <p>{resto.cuisine}</p>
-      <p>{resto.rating}</p>
-      <p>{resto.reviews}</p>
+    <div className='w-1/2 mx-auto'>
+      <div className='text-center'>
+        <h1 className='font-bold text-3xl'>{resto.name}</h1>
+        <p className='text-lg'>{resto.address}</p>
+        <p className='text-lg'>{resto.cuisine}</p>
+        <p className='text-lg'>{resto.rating}</p>
+        <p className='text-lg'>{resto.reviews}</p>
+      </div>
+
+      {
+        detailData.map((detail)=>(
+          <MoreRestoData key={detail.title} data={detail}/>
+        ))
+      }
+
+      {/* {
+         <MoreRestoData key={detailData[0]?.title} data={detailData[0]}/>
+      } */}
     </div>
   );
 }
