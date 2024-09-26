@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -21,6 +22,9 @@ const Body = () => {
       return <Shimmer/>
     }
   };
+
+  const {setUserName,userName} = useContext(UserContext)
+
 
   useEffect(() => {
     fetchData();
@@ -60,6 +64,16 @@ const Body = () => {
               value={searchText}
               onChange={(e) => {
                 setSearchText(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <input
+            className="border border-black my-3"
+              type="text"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
               }}
             />
             <button

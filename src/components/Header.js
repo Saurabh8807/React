@@ -1,8 +1,15 @@
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext"
+import { useContext } from 'react';
+import { useSelector } from "react-redux";
 
 const Header = (obj) => {
+  const items = useSelector((items)=>{return items.cart.items})
+  console.log("store....",items)
+  const {loggedInUser} = useContext(UserContext)
+  console.log(loggedInUser)
   console.log(obj)
   console.log("header");
   const isOnline = useOnlineStatus();
@@ -32,6 +39,12 @@ const Header = (obj) => {
           </li>
           <li className="mx-3">
             <Link to="/contact">Contact</Link>
+          </li>
+          <li className="mx-3">
+            <Link to="/contact">Cart {items.length}</Link>
+          </li>
+          <li className="mx-3">
+            {loggedInUser}
           </li>
         </ul>
       </div>

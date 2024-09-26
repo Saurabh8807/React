@@ -1,9 +1,13 @@
-import React ,{lazy,Suspense}from "react";
+import React ,{lazy,Suspense, useState}from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Error from "./components/Error";
 import { createBrowserRouter,Outlet,RouterProvider } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+// import UserContext from "./utils/UserContext";
+import UserContext  from "./utils/UserContext";
+import appStore from "./redux/appStore";
+import { Provider } from "react-redux";
 
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components//Contact"));
@@ -16,12 +20,19 @@ const AppLayout = () => {
     name:"w",
     age:2
   }
+
+  const [ userName , setUserName ] = useState("")
   return (
-    <div className="app">
-      {Header(obj)}
-      {/* <Header obj={obj}/> */}
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{loggedInUser:userName,setUserName,userName}}>
+        <div className="app">
+          {/* {Header(obj)} */}
+          <Header/>
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
+
   );
 };
 
