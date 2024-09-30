@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+const { createSlice,current } = require("@reduxjs/toolkit");
 
 const cartSlice = createSlice({
     name:"cart",
@@ -7,7 +7,7 @@ const cartSlice = createSlice({
     },
     reducers:{
         addItem:(state,action)=>{
-            console.log("state=>",state)
+            console.log("state=>",current(state))
             console.log("state.items=>",state.items)
             console.log("action=>",action)
             state.items.push(action.payload)
@@ -15,12 +15,12 @@ const cartSlice = createSlice({
         removeItem:(state,action)=>{
             state.items.pop()
         },
-        clearCart:()=>{
+        clearCart:(state)=>{
             state.items.length=0;
         }
     }
 })
 
-export const {addItem,removeItem,reducer}=cartSlice.actions
+export const {addItem,removeItem,clearCart}=cartSlice.actions
 
 export default cartSlice.reducer

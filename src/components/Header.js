@@ -41,7 +41,7 @@ const Header = (obj) => {
             <Link to="/contact">Contact</Link>
           </li>
           <li className="mx-3">
-            <Link to="/contact">Cart {items.length}</Link>
+            <Link to="/cart">Cart {items.length}</Link>
           </li>
           <li className="mx-3">
             {loggedInUser}
