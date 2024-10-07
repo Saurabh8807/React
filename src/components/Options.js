@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../redux/cartSlice";
 
@@ -48,4 +48,4 @@ const Options = ({ resto }) => {
   );
 };
 
-export default Options;
+export default memo(Options);
