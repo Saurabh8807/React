@@ -38,7 +38,7 @@ const Body = () => {
   const PromotedResto=RestaurantCardPromo(RestaurantCard)
 
   return (
-    <div className="">
+    <div>
       {listOfRestaurants.length === 0 ? (
         <Shimmer />
       ) : (

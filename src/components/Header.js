@@ -17,6 +17,7 @@ const Header = (obj) => {
   return (
     <div className="flex flex-row justify-between">
       <div>
+        
         <div
           style={{
             backgroundColor: `${isOnline ? "green" : "red"}`,
@@ -25,7 +26,7 @@ const Header = (obj) => {
           }}
         ></div>
 
-        <div className="">
+        <div>
           <img className="h-20 w-40" src={LOGO_URL} />
         </div>
       </div>

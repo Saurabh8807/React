@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { findNthPrime } from "../utils/helper"; 
+import Demo from "./Demo";
 
 const Contact = () => {
     const [text, setText] = useState(1); 
@@ -38,6 +39,7 @@ const Contact = () => {
                 <h1>{text}</h1>
                 <h1>nth prime: {cache()}</h1>
             </div>
+            <Demo/>
         </>
     );
 }
